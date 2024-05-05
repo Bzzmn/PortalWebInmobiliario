@@ -1,0 +1,16 @@
+<div class="card" style="width: 18rem;">
+    <img src="{{ inmueble.imagen.url }}" class="card-img-top" alt="{{ inmueble.nombre }}">
+    <div class="card-body">
+    <h5 class="card-title">{{ inmueble.nombre }}</h5>
+    <p class="card-text">{{ inmueble.descripcion }}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">Dirección: {{ inmueble.direccion }}, {{ inmueble.comuna }}, {{ inmueble.region }}</li>
+    <li class="list-group-item">Precio de Arriendo: ${{ inmueble.precio_arriendo }}</li>
+    <li class="list-group-item">Publicado el: {{ inmueble.fecha_publicacion }}</li>
+    </ul>
+    <div class="card-body">
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+    </div>
+</div>

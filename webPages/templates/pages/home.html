@@ -1,0 +1,22 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+    <h1>Bienvenido a Genzee</h1>
+    <h2>Inmuebles disponibles</h2>
+    {% if inmuebles %}
+        <div class='container d-flex flex-wrap gap-4'>
+            {% for inmueble in inmuebles %}
+                    {% include "components/inmuebleCardHome.html" %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock content %}

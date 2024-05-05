@@ -1,0 +1,68 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Panel Arrendador</h1>
+
+    <h2>Perfil de Usuario</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ datos_instance.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <a class='btn btn-primary' href="{% url 'registroInmueble' %}">Registrar nuevo inmueble</a>
+    <h2>Mis Inmuebles</h2>
+
+    {% if inmuebles %}
+        <div class='container d-flex flex-wrap gap-4'>
+            {% for inmueble in inmuebles %}
+                {% include "components/inmuebleCard.html" %}
+            {% endfor %}
+        </div> 
+        {% else %}
+        <p>No has registrado ningun inmueble aun</p>
+    {% endif %}
+
+
+    <h2>Solicitudes</h2>
+
+    {% if solicitudes_pendientes %}
+        <div class='container d-flex flex-wrap gap-4'>
+            {% for solicitud in solicitudes_pendientes %}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ solicitud.inmueble.nombre }}</h5>
+                        <p class="card-text">{{ solicitud.mensaje }}</p>
+                    </div>
+                    <ul class="list-group
+                    list-group-flush">
+                        <li class="list-group-item">Nombre: {{ solicitud.nombre }}</li>
+                        <li class="list-group-item">Email: {{ solicitud.email }}</li>
+                        <li class="list-group-item">Telefono: {{ solicitud.telefono }}</li>
+                        
+                        
+                    </ul>
+                    <div class="card-body">
+                        {% comment %} <a href="{% url 'aceptarSolicitud' solicitud.id %}" class="card-link">Aceptar</a>
+                        <a href="{% url 'rechazarSolicitud' solicitud.id %}" class="card-link">Rechazar</a> {% endcomment %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No tienes solicitudes pendientes</p>
+    {% endif %} 
+
+{% endblock content %}
+
+
