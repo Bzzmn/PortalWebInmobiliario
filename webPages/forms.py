@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
-from .models import Arrendador, Arrendatario, Datos, Inmueble, Solicitud
+from .models import Arrendador, Arrendatario, Datos, Inmueble, Solicitud, Comuna, Region
 
 # FORM DE REGISTRO DE USUARIO ARRENDADOR
 class ArrendadorRegisterForm(UserCreationForm):
@@ -96,6 +96,7 @@ class DatosForm(forms.ModelForm):
 
 # FORM DE REGISTRO DE INMUEBLE
 class InmuebleForm(forms.ModelForm):
+
     class Meta:
         model = Inmueble
         fields = [ 
@@ -103,7 +104,6 @@ class InmuebleForm(forms.ModelForm):
             'imagen', 
             'direccion', 
             'comuna', 
-            'region', 
             'descripcion', 
             'superficie_construida', 
             'superficie_total',
@@ -119,7 +119,6 @@ class InmuebleForm(forms.ModelForm):
             'imagen': 'Imagen',
             'direccion': 'Dirección',
             'comuna': 'Comuna',
-            'region': 'Región',
             'descripcion': 'Descripción',
             'superficie_construida': 'Superficie Construida',
             'superficie_total': 'Superficie Total',
@@ -136,8 +135,18 @@ class InmuebleForm(forms.ModelForm):
         if self.user and not self.user.es_arrendador:
             raise forms.ValidationError('No tienes permisos para realizar esta acción')
 
+        # Obtener todas las comunas disponibles
+        comunas = Comuna.objects.all().order_by('nombre')
+        # Crear una lista de opciones de comuna en formato (id, nombre)
+        opciones_comuna = [(comuna.id, comuna.nombre) for comuna in comunas]
+        # Actualizar el widget de comuna con las opciones creadas
+        self.fields['comuna'].widget = forms.Select(choices=opciones_comuna)
+
     def save(self, commit=True):
         inmueble = super().save(commit=False)
+        instance = isinstance(self.user, Arrendador)
+        print('is instance', instance) 
+        print('Es arrendador', self.user.es_arrendador)
         if isinstance(self.user, Arrendador) and self.user.es_arrendador:
             inmueble.arrendador = self.user
         else:

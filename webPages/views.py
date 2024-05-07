@@ -101,7 +101,7 @@ def panelArrendador(request):
             'solicitudes_pendientes': solicitudes_pendientes,
             'solicitudes_aceptadas': solicitudes_aceptadas,
             'solicitudes_rechazadas': solicitudes_rechazadas,
-            'datos_instance': datos_instance,
+            'form': form,
         }
 
         return render(request, 'pages/panelArrendador.html' , context)
@@ -131,7 +131,7 @@ def panelArrendatario(request):
 
         context = {
             'solicitudes': solicitudes,
-            'datos_form': form
+            'form': form
         }
 
         return render(request, 'pages/panelArrendatario.html', context )
@@ -179,9 +179,11 @@ class InmuebleCreateView(LoginRequiredMixin, ArrendadorRequiredMixin, CreateView
 
         try:
             arrendador = Arrendador.objects.get(rut=user.rut)
+            print('arrendador:', arrendador, 'user:', user, 'rut:', user.rut)
             kwargs.update({'user': arrendador})
         except Arrendador.DoesNotExist:
             kwargs.update({'user': None})
+            print('se actualizó el diccionario con user: None')
         return kwargs
 
 #ACTUALIZAR INMUEBLE < pendiente de revisión >

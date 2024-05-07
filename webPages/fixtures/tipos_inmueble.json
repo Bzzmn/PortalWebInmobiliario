@@ -1,0 +1,23 @@
+[
+    {
+        "model": "webPages.TipoDeInmueble",
+        "pk": 1,
+        "fields": {
+            "nombre": "Casa"
+        }
+    },
+    {
+        "model": "webPages.TipoDeInmueble",
+        "pk": 2,
+        "fields": {
+            "nombre": "Departamento"
+        }
+    }, 
+    {
+        "model": "webPages.TipoDeInmueble",
+        "pk": 3,
+        "fields": {
+            "nombre": "Parcela"
+        }
+    }
+]

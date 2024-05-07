@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
 
-# Manager user model
 class CustomUserManager(UserManager):
 
     use_in_migrations = True
@@ -34,8 +33,6 @@ class CustomUserManager(UserManager):
 
         return self._create_user(email, password, **extra_fields)
 
-
-# Create your models here.
 class Usuario(AbstractUser):
 
     username = None
@@ -51,7 +48,6 @@ class Usuario(AbstractUser):
     apellido = models.CharField(max_length=50)
     rut = models.CharField(max_length=9, primary_key=True)
 
-    # Agrega related_name únicos para groups y user_permissions
     groups = models.ManyToManyField(
         'auth.Group',
         verbose_name='groups',
@@ -86,27 +82,17 @@ class Datos(models.Model):
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, related_name='datos')
 
 class Inmueble(models.Model):
-    class TipoDeInmueble(models.TextChoices):
-        CASA = 'casa', 'Casa'
-        DEPARTAMENTO = 'departamento', 'Departamento'
-        PARCELA = 'parcela', 'Parcela'
-
     nombre = models.CharField(max_length=50)
     imagen = models.ImageField(upload_to='inmuebles')
     direccion = models.CharField(max_length=100)
-    comuna = models.CharField(max_length=50)
-    region = models.CharField(max_length=50)
+    comuna = models.ForeignKey('Comuna', on_delete=models.SET_NULL, related_name='inmuebles', null=True)
     descripcion = models.TextField()
     superficie_construida = models.FloatField()
     superficie_total = models.FloatField()
     cantidad_estacionamientos = models.IntegerField(default=1)
     cantidad_habitaciones = models.IntegerField(default=1)
     cantidad_banos = models.IntegerField(default=1)
-    tipo_de_inmueble = models.CharField(
-        max_length=20,
-        choices=TipoDeInmueble.choices,
-        default=TipoDeInmueble.CASA
-    )
+    tipo_de_inmueble = models.ForeignKey('TipoDeInmueble', on_delete=models.SET_NULL, related_name='inmuebles', null=True)
     precio_arriendo = models.IntegerField()
     disponible = models.BooleanField(default=True)
     fecha_publicacion = models.DateField(auto_now_add=True)
@@ -131,4 +117,33 @@ class Solicitud(models.Model):
     fecha_solicitud = models.DateField(auto_now_add=True)
     fecha_aceptacion = models.DateField(null=True)
     fecha_rechazo = models.DateField(null=True)
+
+class Region(models.Model):
+    nombre = models.CharField(max_length=100)
+
+    def natural_key(self):
+        return (self.nombre,)  
+
+class Comuna(models.Model):
+    nombre = models.CharField(max_length=100)
+    region = models.ForeignKey('Region', on_delete=models.CASCADE, related_name='comunas')
+
+    def natural_key(self):
+        return (self.nombre,) 
+
+    class Meta:
+        unique_together = (('nombre', 'region'),)
+
+class TipoDeInmueble(models.Model):
+    nombre = models.CharField(max_length=100, unique=True)
+
+    def natural_key(self):
+        return (self.nombre,)  
+
+    def __str__(self):
+        return self.nombre
+
+
+
+
 

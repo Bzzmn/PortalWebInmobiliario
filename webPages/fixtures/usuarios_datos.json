@@ -1,0 +1,310 @@
+[
+    {
+        "model": "webPages.usuario",
+        "pk": "123456781",
+        "fields": {
+            "email": "arrendador1@mail.com",
+            "password": "pbkdf2_sha256$720000$QiJfV17FAT2JETuVyV9Lcu$j7hHKdupPjkHTcsrH91WWx1eDl0PbXg/8JE4R0Tsqpc=",
+            "nombre": "Jose",
+            "apellido": "Lopez",
+            "rut": "123456781",
+            "es_arrendador": true
+        }
+    },
+    {
+        "model": "webPages.arrendador",
+        "pk": "123456781",
+        "fields": {
+            "usuario_ptr_id": "123456781"
+        }
+    },
+    {
+        "model": "webPages.datos",
+        "fields": {
+            "direccion": "Calle B 461",
+            "telefono": "964887228",
+            "email": "arrendador1@mail.com",
+            "usuario": "123456781"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "pk": "123456782",
+        "fields": {
+            "email": "arrendador2@mail.com",
+            "password": "pbkdf2_sha256$720000$uOA7HXvWsJPiR0h6xQnNsD$2GBwiL/s0raohmDvblbPkMp07o6etiWi1nxZcQrAK10=",
+            "nombre": "Luis",
+            "apellido": "Fuenzalida",
+            "rut": "123456782",
+            "es_arrendador": true
+        }
+    },
+    {
+        "model": "webPages.arrendador",
+        "pk": "123456782",
+        "fields": {
+            "usuario_ptr_id": "123456782"
+        }
+    },
+    {
+        "model": "webPages.datos",
+        "fields": {
+            "direccion": "Calle E 426",
+            "telefono": "951636146",
+            "email": "arrendador2@mail.com",
+            "usuario": "123456782"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "pk": "123456783",
+        "fields": {
+            "email": "arrendador3@mail.com",
+            "password": "pbkdf2_sha256$720000$MVMWOzm2GedIpE5XFKZFDq$bDLF3gMRcrOcgEAhy/pCMmYdW9njvJI6zgBlwP49Q8c=",
+            "nombre": "Fernando",
+            "apellido": "Carrasco",
+            "rut": "123456783",
+            "es_arrendador": true
+        }
+    },
+    {
+        "model": "webPages.arrendador",
+        "pk": "123456783",
+        "fields": {
+            "usuario_ptr_id": "123456783"
+        }
+    },
+    {
+        "model": "webPages.datos",
+        "fields": {
+            "direccion": "Calle C 765",
+            "telefono": "951453566",
+            "email": "arrendador3@mail.com",
+            "usuario": "123456783"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "pk": "122342678",
+        "fields": {
+            "email": "arrendador4@mail.com",
+            "password": "pbkdf2_sha256$720000$J4u8RWGVNDeITXkD66054I$+ZZaT8jJ/laMgmpp043ARvVsJgNOEtIY+f85B9MbywM=",
+            "nombre": "Jorge",
+            "apellido": "Gerjo",
+            "rut": "122342678",
+            "es_arrendador": true
+        }
+    },
+    {
+        "model": "webPages.arrendador",
+        "pk": "122342678",
+        "fields": {
+            "usuario_ptr_id": "122342678"
+        }
+    },
+    {
+        "model": "webPages.datos",
+        "fields": {
+            "direccion": "Calle A 345",
+            "telefono": "983758875",
+            "email": "arrendador4@mail.com",
+            "usuario": "122342678"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "pk": "147686783",
+        "fields": {
+            "email": "arrendador5@mail.com",
+            "password": "pbkdf2_sha256$720000$fs0PHcDFrD0KcCCmaR9Qub$dXjHBHs/ViBmbB1oIttNPCcmBmrdTj0KV15bo1Wrfp0=",
+            "nombre": "Francisco",
+            "apellido": "Olivares",
+            "rut": "147686783",
+            "es_arrendador": true
+        }
+    },
+    {
+        "model": "webPages.arrendador",
+        "pk": "147686783",
+        "fields": {
+            "usuario_ptr_id": "147686783"
+        }
+    },
+    {
+        "model": "webPages.datos",
+        "fields": {
+            "direccion": "Calle F 907",
+            "telefono": "951509446",
+            "email": "arrendador5@mail.com",
+            "usuario": "147686783"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "pk": "123458873",
+        "fields": {
+            "email": "arrendador6@mail.com",
+            "password": "pbkdf2_sha256$720000$sLbnEoURA1YImhQYHJMsAl$o8xEHRSeCxE8OSx0s+QbUQerfjM3JZcvNU7yxt4MhUI=",
+            "nombre": "Patricia",
+            "apellido": "Fernandez",
+            "rut": "123458873",
+            "es_arrendador": true
+        }
+    },
+    {
+        "model": "webPages.arrendador",
+        "pk": "123458873",
+        "fields": {
+            "usuario_ptr_id": "123458873"
+        }
+    },
+    {
+        "model": "webPages.datos",
+        "fields": {
+            "direccion": "Calle G 74573",
+            "telefono": "977553566",
+            "email": "arrendador6@mail.com",
+            "usuario": "123458873"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "pk": "123457683",
+        "fields": {
+            "email": "arrendador7@mail.com",
+            "password": "pbkdf2_sha256$720000$2LuRfs7VL1oyNptSKtliHy$I3HfL24HeHZcd/BKUykNj2ZGoUkIJIWYjQ+3SEtwK/g=",
+            "nombre": "Carolina",
+            "apellido": "Perez",
+            "rut": "123457683",
+            "es_arrendador": true
+        }
+    },
+    {
+        "model": "webPages.arrendador",
+        "pk": "123457683",
+        "fields": {
+            "usuario_ptr_id": "123457683"
+        }
+    },
+    {
+        "model": "webPages.datos",
+        "fields": {
+            "direccion": "Calle H 636",
+            "telefono": "951994566",
+            "email": "arrendador7@mail.com",
+            "usuario": "123457683"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "pk": "123444783",
+        "fields": {
+            "email": "arrendador8@mail.com",
+            "password": "pbkdf2_sha256$720000$UyaJoTjhStpr2VsFGRw87w$JrfQN2rUFSm8JzzFf5hdt9ifUceFnJ7HZE2z7ZAnHY4=",
+            "nombre": "Constanza",
+            "apellido": "Navarro",
+            "rut": "123444783",
+            "es_arrendador": true
+        }
+    },
+    {
+        "model": "webPages.arrendador",
+        "pk": "123444783",
+        "fields": {
+            "usuario_ptr_id": "123444783"
+        }
+    },
+    {
+        "model": "webPages.datos",
+        "fields": {
+            "direccion": "Calle I 7134",
+            "telefono": "952298566",
+            "email": "arrendador8@mail.com",
+            "usuario": "123444783"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "pk": "123988778",
+        "fields": {
+            "email": "arrendador9@mail.com",
+            "password": "pbkdf2_sha256$720000$1R8LMk9AEW4GLCRHXcc5Au$5indGTNE4SmBfFAeJuPe1pgfSdYwefosFDAx05KfdsU=",
+            "nombre": "Lorena",
+            "apellido": "Diaz",
+            "rut": "123988778",
+            "es_arrendador": true
+        }
+    },
+    {
+        "model": "webPages.arrendador",
+        "pk": "123988778",
+        "fields": {
+            "usuario_ptr_id": "123988778"
+        }
+    },
+    {
+        "model": "webPages.datos",
+        "fields": {
+            "direccion": "Calle J 945",
+            "telefono": "951945666",
+            "email": "arrendador9@mail.com",
+            "usuario": "123988778"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "pk": "166540965",
+        "fields": {
+            "email": "arrendatario1@mail.com",
+            "password": "pbkdf2_sha256$720000$E0E7ckSCN4w8OTS4J78R7s$xIW/AJCQCai/IOEXx2SbCIbWFeYSPW6eZCGdiNCOmBs=",
+            "nombre": "Karin",
+            "apellido": "Manriquez",
+            "rut": "166540965",
+            "es_arrendador": false
+        }
+    },
+    {
+        "model": "webPages.arrendatario",
+        "pk": "166540965",
+        "fields": {
+            "usuario_ptr_id": "166540965"
+        }
+    },
+    {
+        "model": "webPages.datos",
+        "fields": {
+            "direccion": "Calle D 834",
+            "telefono": "950892373",
+            "email": "arrendatario1@mail.com",
+            "usuario": "166540965"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "pk": "166545252",
+        "fields": {
+            "email": "arrendatario2@mail.com",
+            "password": "pbkdf2_sha256$720000$IQN51kNmCWb36i7AhinRwJ$HfdqjF6zLLnZvKl00hjpRkZyiv+a8E8ujz3ZDpkpyok=",
+            "nombre": "Ana",
+            "apellido": "Garcia",
+            "rut": "166545252",
+            "es_arrendador": false
+        }
+    },
+    {
+        "model": "webPages.arrendatario",
+        "pk": "166545252",
+        "fields": {
+            "usuario_ptr_id": "166545252"
+        }
+    },
+    {
+        "model": "webPages.datos",
+        "fields": {
+            "direccion": "Calle K 923",
+            "telefono": "988348073",
+            "email": "arrendatario2@mail.com",
+            "usuario": "166545252"
+        }
+    }
+]
