@@ -1,19 +1,36 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
-
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}" role="alert">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
-
-    <h1>Bienvenido a Genzee</h1>
-    <h2>Inmuebles disponibles</h2>
+    {% load static %}
+    {% load crispy_forms_tags %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div>
+        <swiper-container 
+        class="mySwiper" 
+        pagination="true" 
+        pagination-clickable="true" 
+        navigation="false" 
+        space-between="30"
+        centered-slides="true" 
+        autoplay-delay="3500" autoplay-disable-on-interaction="false"
+        >
+            <swiper-slide><img src="{% static 'images/slider_1.webp' %}" alt=""></swiper-slide>
+            <swiper-slide><img src="{% static 'images/slider_2.webp' %}" alt=""></swiper-slide>
+        </swiper-container>   
+    </div>
+    <div class="search-form-container">
+        <form class="search-form" method="get">
+            {% crispy form %}
+        </form>
+    </div>
     {% if inmuebles %}
-        <div class='container d-flex flex-wrap gap-4'>
+        <div class='container d-flex flex-wrap gap-4 justify-content-center'>
             {% for inmueble in inmuebles %}
                     {% include "components/inmuebleCardHome.html" %}
             {% endfor %}

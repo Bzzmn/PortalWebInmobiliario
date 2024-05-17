@@ -2,7 +2,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
-from .models import Arrendador, Arrendatario, Datos, Inmueble, Solicitud, Comuna, Region
+from .models import Arrendador, Arrendatario, Datos, Inmueble, Solicitud, Comuna, Region, Usuario, TipoDeInmueble
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 
 # FORM DE REGISTRO DE USUARIO ARRENDADOR
 class ArrendadorRegisterForm(UserCreationForm):
@@ -12,6 +14,11 @@ class ArrendadorRegisterForm(UserCreationForm):
         widgets = {
             'password': forms.PasswordInput()
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.add_input(Submit('submit', 'Completar registro', css_class='btn btn-primary'))
 
     def save(self, commit= True):
         user = super().save(commit=False)
@@ -31,6 +38,11 @@ class ArrendatarioRegisterForm(UserCreationForm):
         widgets = {
             'password': forms.PasswordInput()
         }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.add_input(Submit('submit', 'Completar registro', css_class='btn btn-primary'))
 
     def save(self, commit= True):
         user = super().save(commit=False)
@@ -46,6 +58,11 @@ class ArrendatarioRegisterForm(UserCreationForm):
 class CustomLoginForm(AuthenticationForm):
     username = forms.EmailField(label='Correo Electrónico', widget=forms.TextInput(attrs={'autofocus': True, 'class' : 'form-control'}))
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.add_input(Submit('submit', 'Iniciar Sesión', css_class='btn btn-primary'))
+
     def clean(self):
         email = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
@@ -53,17 +70,13 @@ class CustomLoginForm(AuthenticationForm):
         if email is not None and password:
             self.user_cache = authenticate(self.request, username=email, password=password)
             if self.user_cache is None:
-                raise ValidationError('Usuario o contraseña incorrectosss', code='invalid_login')
+                raise ValidationError('Usuario o contraseña incorrectos', code='invalid_login')
             else:
                 self.confirm_login_allowed(self.user_cache)
         return self.cleaned_data
 
-
 # FORM DE REGISTRO DE DATOS DE CONTACTO
-class DatosForm(forms.ModelForm):
-
-    email =  forms.EmailField(disabled=True, label='Correo Electrónico')
-    
+class DatosForm(forms.ModelForm):    
     class Meta:
         model = Datos
         fields = ['direccion', 'telefono', 'email']
@@ -71,18 +84,23 @@ class DatosForm(forms.ModelForm):
             'direccion': 'Dirección',
             'telefono': 'Teléfono'
         }
+        widgets = {
+            'email': forms.HiddenInput(),
+        }
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(DatosForm, self).__init__(*args, **kwargs)
         if self.user:
             self.fields['email'].initial = self.user.email
-            self.fields['email'].disabled = True 
+            self.helper = FormHelper(self)
+            self.helper.add_input(Submit('submit', 'Guardar', css_class='btn btn-primary'))
             
             try:
                 instance = Datos.objects.get(usuario=self.user)
                 for field in self.fields:
-                    self.fields[field].initial = getattr(instance, field)
+                    if field != 'email':
+                        self.fields[field].initial = getattr(instance, field)
             except Datos.DoesNotExist:
                 pass
 
@@ -132,8 +150,13 @@ class InmuebleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(InmuebleForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+        self.helper.add_input(Submit('submit', 'Registrar inmueble', css_class='btn btn-primary'))
         if self.user and not self.user.es_arrendador:
             raise forms.ValidationError('No tienes permisos para realizar esta acción')
+
+
 
         # Obtener todas las comunas disponibles
         comunas = Comuna.objects.all().order_by('nombre')
@@ -170,8 +193,11 @@ class SolicitudForm(forms.ModelForm):
         self.inmueble = kwargs.pop('inmueble', None)
         self.arrendatario = kwargs.pop('arrendatario', None)
         super(SolicitudForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.add_input(Submit('submit', 'Enviar solicitud', css_class='btn btn-primary'))
         if self.inmueble is None or self.arrendatario is None:
             raise forms.ValidationError("Información de inmueble o arrendatario no proporcionada.")
+
 
     def clean(self):
         cleaned_data = super().clean()
@@ -195,4 +221,29 @@ class SolicitudForm(forms.ModelForm):
             solicitud.save()
         return solicitud
 
+# FORM DE BUSQUEDA DE PROPIEDAD
+
+class PropertySearchForm(forms.Form):
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.add_input(Submit('submit', 'Buscar', css_class='btn btn-primary'))
+
+    tipo_de_inmueble = forms.ModelChoiceField(
+        queryset=TipoDeInmueble.objects.all(),
+        required=False,
+        label="Tipo de Inmueble"
+    )
+    region = forms.ModelChoiceField(
+        queryset=Region.objects.all(),
+        required=False,
+        label="Región"
+    )
+    comuna = forms.ModelChoiceField(
+        queryset=Comuna.objects.all(),
+        required=False,
+        label="Comuna"
+    )
 

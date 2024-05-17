@@ -1,9 +1,6 @@
 {% extends 'layouts/base.html' %}
-{% load crispy_forms_tags %}
 
 {% block content %}
-
-
 
     {% if messages %}
         {% for message in messages %}
@@ -12,14 +9,12 @@
             </div>
         {% endfor %}
     {% endif %}
+    {% if inmueble %}
     <div class="centered-container">
-        <div class="form-container">
-        
-            <h1>Solicitud de Arriendo</h1>
-            <form method="post">
-                {% csrf_token %}
-                {% crispy form %}
-            </form>
-        </div>  
+        <div class="form-container detail">
+            {% include "components/detalleInmuebleCard.html" %}
+        </div>
     </div>
+    {% endif %}
 {% endblock content %}
+

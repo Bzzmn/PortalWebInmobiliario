@@ -1,7 +1,16 @@
-<h1>Regisro Inmueble</h1>
+{% extends 'layouts/secondary.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="centered-container">
+    <div class="form-container">
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar</button>
-</form>
+        <h1>Regisro Inmueble</h1>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% crispy form %}
+        </form>
+    </div>
+</div>
+{% endblock content %}
+

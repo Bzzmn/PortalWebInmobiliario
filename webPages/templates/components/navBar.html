@@ -1,8 +1,10 @@
 {% load static %}
-<nav class="navbar bg-body-secondary sticky-top navbar-expand-md">
+<nav class="nav bg-main-color sticky-top">
+  <div class="navbar container sticky-top navbar-expand-md">
+
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img class='main-logo' src="{% static 'images/logo_horizontal.png' %}" alt=""></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="{% url "home"%}"><img class='main-logo' src="{% static 'images/logo_horizontal.png' %}" alt=""></a>
+      <button class="navbar-toggler font-color-primary " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -11,32 +13,46 @@
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>
+          <ul class="navbar-nav justify-content-end align-items-center flex-grow-1 pe-3">
+            {% if not user.is_authenticated %}
+              <li class="selector-login d-flex align-items-center">
+                <a class="" aria-current="page" href="{% url "login"%}">Ingresar</a> <p class="px-2">|</p> <a class="" href="{% url 'seleccionarUsuario' %}">Crear una cuenta</a>
+              </li>
+            {% else %}
+              <li class="selector-login nav-item ps-5  d-flex align-items-center">
+                <a class="nav-link" href="{% url 'redirigirPanel' %}">Hola, {{ user.nombre | capfirst }}</a>
+     
+           
+                <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
+                  {% csrf_token %}
+                </form>
+                <p class="px-2">|</p>
+                <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                   Cerrar sesión
+                </a>
+              </li>          
+            {% endif %}
+
           </ul>
-          <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+          <div class="d-flex" role="search">
+            <button id="publicar-propiedad" class="btn btn-outline-success" type="button">Publicar mi propiedad</button>
+          </div>
         </div>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>
+
+<script>
+  document.getElementById('publicar-propiedad').addEventListener('click', function() {
+    {% if user.is_authenticated %}
+      {% if user.es_arrendador %}
+        window.location.href = "{% url 'panelArrendador' %}";
+      {% else %}
+        alert("Estás en tu sesión de arrendador. Por favor, cambia a tu sesión de arrendatario.");
+      {% endif %}
+    {% else %}
+      window.location.href = "{% url 'login' %}";
+    {% endif %}
+  });
+</script>

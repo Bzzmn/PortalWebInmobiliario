@@ -1,17 +1,7 @@
 {% extends 'layouts/base.html' %}
-{% load static %}
-
+{% load crispy_forms_tags %}
+{% load static %}   
 {% block content %}
-    <h1>Panel Arrendador</h1>
-
-    <h2>Perfil de Usuario</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
-    </form>
-
-
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }}" role="alert">
@@ -19,50 +9,154 @@
             </div>
         {% endfor %}
     {% endif %}
-
-    <a class='btn btn-primary' href="{% url 'registroInmueble' %}">Registrar nuevo inmueble</a>
-    <h2>Mis Inmuebles</h2>
-
-    {% if inmuebles %}
-        <div class='container d-flex flex-wrap gap-4'>
-            {% for inmueble in inmuebles %}
-                {% include "components/inmuebleCard.html" %}
-            {% endfor %}
-        </div> 
-        {% else %}
-        <p>No has registrado ningun inmueble aun</p>
-    {% endif %}
-
-
-    <h2>Solicitudes</h2>
-
-    {% if solicitudes_pendientes %}
-        <div class='container d-flex flex-wrap gap-4'>
-            {% for solicitud in solicitudes_pendientes %}
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ solicitud.inmueble.nombre }}</h5>
-                        <p class="card-text">{{ solicitud.mensaje }}</p>
-                    </div>
-                    <ul class="list-group
-                    list-group-flush">
-                        <li class="list-group-item">Nombre: {{ solicitud.nombre }}</li>
-                        <li class="list-group-item">Email: {{ solicitud.email }}</li>
-                        <li class="list-group-item">Telefono: {{ solicitud.telefono }}</li>
-                        
-                        
-                    </ul>
-                    <div class="card-body">
-                        {% comment %} <a href="{% url 'aceptarSolicitud' solicitud.id %}" class="card-link">Aceptar</a>
-                        <a href="{% url 'rechazarSolicitud' solicitud.id %}" class="card-link">Rechazar</a> {% endcomment %}
-                    </div>
+    <div class="container userpage-container">
+        <div class="row">
+            <div class="col">
+                <h2>Este es tu perfil de Arrendador</h2>
+                <div>
+                    <h3>{{ user.nombre }} {{ user.apellido }}</h3>
+                    <h3>{{ user.email }}</h3>
                 </div>
-            {% endfor %}
+                  
+                {% if datos %}
+                    {% include "components/userAccordeon.html"  %}
+                {% else %}
+                    <p class="alert alert-warning">Aun no has completado tu perfil, ingresa tus datos de contacto</p>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% crispy form %}
+                    </form>
+                {% endif %}
+                <h2 class="pt-5">Mis Inmuebles</h2>
+                <a class='btn btn-primary my-2' href="{% url 'registroInmueble' %}">Registrar nuevo inmueble</a>
+                
+            
+                {% if inmuebles %}
+                    <div class='d-flex flex-wrap gap-4'>
+                        {% for inmueble in inmuebles %}
+                            {% include "components/inmuebleCard.html" %}
+                        {% endfor %}
+                    </div> 
+                    {% else %}
+                    <p>No has registrado ningun inmueble aun</p>
+                {% endif %}
+            
+ 
+            </div>    
+            <div class="col">
+                <h2>solicitudes</h2>
+                {% if solicitudes %}
+                    {% for solicitud in solicitudes %}
+                             {% if solicitud.estado == 'pendiente' %}
+                                <div class="card text-bg-warning my-2">
+                                    <div class="card-header">
+                                        <div class='d-flex justify-content-between'>
+                                            <p>{{ solicitud.estado }}</p>
+                                            <p>{{ solicitud.fecha_solicitud }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                    <h5 class="card-title">{{ solicitud.inmueble.nombre }}</h5>
+                                    <p class="card-text">{{ solicitud.inmueble.direccion }}, {{ solicitud.inmueble.comuna }}</p>
+                                    <button class="btn btn-success" onclick="aceptarSolicitud({{ solicitud.id }})">aceptar</button>
+                                    <button class="btn btn-danger" onclick="rechazarSolicitud({{ solicitud.id }})">rechazar</button>
+                            
+                                {% elif solicitud.estado == 'rechazada' %}
+                                    <div class="card text-bg-danger">
+                                        <div class="card-header">
+                                            <div class='d-flex justify-content-between'>
+                                                <p>{{ solicitud.estado }}</p>
+                                                <p>{{ solicitud.fecha_solicitud }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                        <h5 class="card-title">{{ solicitud.inmueble.nombre }}</h5>
+                                        <p class="card-text">{{ solicitud.inmueble.direccion }}, {{ solicitud.inmueble.comuna }}</p>
+                                        <button class="btn btn-primary" onclick="eliminarSolicitud({{ solicitud.id }})">Eliminar Solicitud</button>
+                                {% elif solicitud.estado == 'aceptada' %}
+                                    <div class="card text-bg-success">
+                                        <div class="card-header">
+                                            <div class='d-flex justify-content-between'>
+                                                <p>{{ solicitud.estado }}</p>
+                                                <p>{{ solicitud.fecha_solicitud }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                        <h5 class="card-title">{{ solicitud.inmueble.nombre }}</h5>
+                                        <p class="card-text">{{ solicitud.inmueble.direccion }}, {{ solicitud.inmueble.comuna }}</p>
+                                        <button class="btn btn-primary" onclick="siguientePaso()">Siguiente Paso</button>
+                            {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        
         </div>
-    {% else %}
-        <p>No tienes solicitudes pendientes</p>
-    {% endif %} 
+        
+    </div>
+    
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function cancelarSolicitud(solicitudId) {
+            if (confirm('¿Estás seguro de que quieres cancelar esta solicitud?')) {
+                fetch(`/cancelar_solicitud/${solicitudId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken'),
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Solicitud cancelada');
+                        location.reload();
+                    } else {
+                        alert('Error al cancelar la solicitud.');
+                    }
+                });
+            }
+        }
+
+        function eliminarSolicitud(solicitudId) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta solicitud?')) {
+                fetch(`/eliminar_solicitud/${solicitudId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken'),
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        location.reload();
+                        console.log('Solicitud eliminada');
+                    } else {
+                        alert('Error al eliminar la solicitud.');
+                    }
+                });
+            }
+        }
+
+        function siguientePaso() {
+            alert('Siguiente paso');
+        }
+    </script>
+
+<script src=" {% static 'js/arrendador.js' %}"></script>
 
 {% endblock content %}
-
-

@@ -1,8 +1,15 @@
-<h1>Registro</h1>
+{% extends 'layouts/secondary.html' %}
+{% load crispy_forms_tags %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-</form>
+{% block content %}
+    <div class="centered-container">
+        <div class="form-container">
+            <h1>Ingresa tus datos.</h1>
+            <form method="post" >
+                {% csrf_token %}
+                {% crispy form %}
+            </form>
+        </div>
+    </div>
+{% endblock content %}
 

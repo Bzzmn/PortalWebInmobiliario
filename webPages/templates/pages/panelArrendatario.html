@@ -1,44 +1,149 @@
+
 {% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
-<h1>Panel Arrendatario</h1>
-
-<h2>Perfil de Usuario</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar</button>
-</form>
-
-
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}" role="alert">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
-
-<a class='btn btn-primary' href="{% url 'home' %}">Ver Inmuebles</a>
-
-{% if solicitudes %}
-    {% for solicitud in solicitudes %}
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">{{ solicitud.inmueble.nombre }}</h5>
-                <p class="card-text">{{ solicitud.mensaje }}</p>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Estado: {{ solicitud.estado }}</li>
-                <li class="list-group-item">Fecha de Solicitud: {{ solicitud.fecha_solicitud }}</li>
-            </ul>
-            <div class="card-body">
-                {% comment %} <a href="{% url 'cancelarSolicitud' solicitud.id %}" class="card-link">Cancelar</a> {% endcomment %}
+        {% endfor %}
+    {% endif %}
+    <div class="container userpage-container">
+        <div class="row">
+            <div class="col">
+                <h2>Este es tu perfil de Arrendatario</h2>
+                <div>
+                    <h3>{{ user.nombre }} {{ user.apellido }}</h3>
+                    <h3>{{ user.email }}</h3>
+                </div>
+                  
+                {% if datos %}
+                    {% include "components/userAccordeon.html"  %}
+                {% else %}
+                    <p class="alert alert-warning">Aun no has completado tu perfil, ingresa tus datos de contacto</p>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% crispy form %}
+                    </form>
+                {% endif %}
+ 
+            </div>    
+            <div class="col">
+                <h2>solicitudes</h2>
+                {% if solicitudes %}
+                    {% for solicitud in solicitudes %}
+                             {% if solicitud.estado == 'pendiente' %}
+                                <div class="card text-bg-warning my-2">
+                                    <div class="card-header">
+                                        <div class='d-flex justify-content-between'>
+                                            <p>{{ solicitud.estado }}</p>
+                                            <p>{{ solicitud.fecha_solicitud }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                    <h5 class="card-title">{{ solicitud.inmueble.nombre }}</h5>
+                                    <p class="card-text">{{ solicitud.inmueble.direccion }}, {{ solicitud.inmueble.comuna }}</p>
+                                    <button class="btn btn-primary" onclick="cancelarSolicitud({{ solicitud.id }})">Cancelar Solicitud</button>
+                                    <a href="{% url 'detalleInmueble' solicitud.inmueble.id %}" class="btn btn-secondary">Ver Propiedad</button></a>
+                                {% elif solicitud.estado == 'rechazada' %}
+                                    <div class="card text-bg-danger">
+                                        <div class="card-header">
+                                            <div class='d-flex justify-content-between'>
+                                                <p>{{ solicitud.estado }}</p>
+                                                <p>{{ solicitud.fecha_solicitud }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                        <h5 class="card-title">{{ solicitud.inmueble.nombre }}</h5>
+                                        <p class="card-text">{{ solicitud.inmueble.direccion }}, {{ solicitud.inmueble.comuna }}</p>
+                                        <button class="btn btn-primary" onclick="eliminarSolicitud({{ solicitud.id }})">Eliminar Solicitud</button>
+                                {% elif solicitud.estado == 'aceptada' %}
+                                    <div class="card text-bg-success">
+                                        <div class="card-header">
+                                            <div class='d-flex justify-content-between'>
+                                                <p>{{ solicitud.estado }}</p>
+                                                <p>{{ solicitud.fecha_solicitud }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                        <h5 class="card-title">{{ solicitud.inmueble.nombre }}</h5>
+                                        <p class="card-text">{{ solicitud.inmueble.direccion }}, {{ solicitud.inmueble.comuna }}</p>
+                                        <button class="btn btn-primary" onclick="siguientePaso()">Siguiente Paso</button>
+                            {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
 
+                {% else %}
+                    <p class="alert alert-warning">Aun no has realizado solicitudes</p>
+                {% endif %}
             </div>
+        
         </div>
+        
+    </div>
+    
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
 
-    {% endfor %}
-{% endif %}
+        function cancelarSolicitud(solicitudId) {
+            if (confirm('¿Estás seguro de que quieres cancelar esta solicitud?')) {
+                fetch(`/cancelar_solicitud/${solicitudId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken'),
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Solicitud cancelada');
+                        location.reload();
+                    } else {
+                        alert('Error al cancelar la solicitud.');
+                    }
+                });
+            }
+        }
+
+        function eliminarSolicitud(solicitudId) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta solicitud?')) {
+                fetch(`/eliminar_solicitud/${solicitudId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken'),
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        location.reload();
+                        console.log('Solicitud eliminada');
+                    } else {
+                        alert('Error al eliminar la solicitud.');
+                    }
+                });
+            }
+        }
+
+        function siguientePaso() {
+            alert('Siguiente paso');
+        }
+    </script>
 
 {% endblock content %}
 

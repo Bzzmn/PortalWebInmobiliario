@@ -10,6 +10,6 @@
     <li class="list-group-item">Publicado el: {{ inmueble.fecha_publicacion }}</li>
     </ul>
     <div class="card-body">
-        <a href="{% url 'solicitarArriendo' inmueble.id %}" class="btn btn-primary">Solicitar</a>
+        <a href="{% url 'detalleInmueble' inmueble.id %}" class="btn btn-primary">Ver propiedad</a>
     </div>
 </div>

@@ -1,0 +1,14 @@
+{% extends 'layouts/secondary.html' %}
+{% block content %}
+    <div class="centered-container">
+        <div class="form-container centered-selector">
+            <h1>¿Que quieres hacer?</h1>
+            <div>
+                <a href="{% url 'registroArrendador'%}">
+                <button class="btn btn-primary">Quiero poner en arriendo una propiedad </button></a>
+                <a href="{% url 'registroArrendatario'%}"><button class="btn btn-secondary"> Estoy buscando un lugar para arrendar</button></a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% include "components/footer.html" %}

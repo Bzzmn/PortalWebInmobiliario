@@ -1,7 +1,15 @@
-<h1>login</h1>
+{% extends 'layouts/secondary.html' %}
+{% load crispy_forms_tags %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit">Login</button>
-</form>
+{% block content %}
+    <div class="centered-container">
+        <div class="form-container">
+            <h1>¡Hola! Por favor, ingresa tu dirección de<br> correo electrónico y tu contraseña.</h1>
+            <form method="post" >
+                {% csrf_token %}
+                {% crispy form %}
+                <a href="{% url 'seleccionarUsuario' %}">¿Aún no te has registrado?</a>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

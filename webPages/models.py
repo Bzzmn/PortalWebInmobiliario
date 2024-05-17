@@ -121,12 +121,18 @@ class Solicitud(models.Model):
 class Region(models.Model):
     nombre = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.nombre
+
     def natural_key(self):
         return (self.nombre,)  
 
 class Comuna(models.Model):
     nombre = models.CharField(max_length=100)
     region = models.ForeignKey('Region', on_delete=models.CASCADE, related_name='comunas')
+    
+    def __str__(self):
+        return self.nombre
 
     def natural_key(self):
         return (self.nombre,) 
