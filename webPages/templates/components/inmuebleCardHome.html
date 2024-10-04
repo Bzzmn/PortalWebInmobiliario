@@ -1,15 +1,22 @@
-<div class="card" style="width: 18rem;">
-    <img src="{{ inmueble.imagen.url }}" class="card-img-top" alt="{{ inmueble.nombre }}">
-    <div class="card-body">
+{% load custom_filters %} {# Asegúrate de crear este archivo de filtros personalizados #}
+
+<div class="card">
+  <img src="{{ inmueble.imagen.url }}" class="card-img-top" alt="{{ inmueble.nombre }}" />
+  <div class="card-body">
     <h5 class="card-title">{{ inmueble.nombre }}</h5>
-    <p class="card-text">{{ inmueble.descripcion }}</p>
-    </div>
-    <ul class="list-group list-group-flush">
-    <li class="list-group-item">Dirección: {{ inmueble.direccion }}, {{ inmueble.comuna }}, {{ inmueble.region }}</li>
+    <p class="card-text">
+      <span class="description-text">{{ inmueble.descripcion|truncatechars:100 }}</span>
+      {% if inmueble.descripcion|length > 100 %}
+        <a href="#" class="link p-0 description-toggle" data-full-text="{{ inmueble.descripcion }}">Leer más</a>
+      {% endif %}
+    </p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Dirección: {{ inmueble.direccion }}, {{ inmueble.comuna.nombre }}, {{ inmueble.comuna.region.nombre }}</li>
     <li class="list-group-item">Precio de Arriendo: ${{ inmueble.precio_arriendo }}</li>
     <li class="list-group-item">Publicado el: {{ inmueble.fecha_publicacion }}</li>
-    </ul>
-    <div class="card-body">
-        <a href="{% url 'detalleInmueble' inmueble.id %}" class="btn btn-primary">Ver propiedad</a>
-    </div>
+  </ul>
+  <div class="card-body">
+    <a href="{% url 'detalleInmueble' inmueble.id %}" class="btn btn-primary">Ver propiedad</a>
+  </div>
 </div>

@@ -1,0 +1,13 @@
+<div class="row row-cols-1 row-cols-md-4 g-4">
+  {% if inmuebles %}
+    {% for inmueble in inmuebles %}
+      <div class="col">
+        {% include 'components/inmuebleCardHome.html' %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="col-12">
+      <p class="text-center">No se encontraron propiedades que cumplan con los criterios de búsqueda.</p>
+    </div>
+  {% endif %}
+</div>

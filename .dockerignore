@@ -1,0 +1,17 @@
+   venv/
+   .venv/
+   __pycache__/
+   *.pyc
+   *.pyo
+   *.pyd
+   .git
+   .env
+   .vscode
+   .DS_Store
+   .venv
+   .venv_wsl
+   .pytest_cache
+   .coverage
+   .coverage.*
+   htmlcov
+   .tox

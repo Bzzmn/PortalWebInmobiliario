@@ -1,39 +1,116 @@
 {% extends 'layouts/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-    {% load static %}
-    {% load crispy_forms_tags %}
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}" role="alert">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
-    <div>
-        <swiper-container 
-        class="mySwiper" 
-        pagination="true" 
-        pagination-clickable="true" 
-        navigation="false" 
-        space-between="30"
-        centered-slides="true" 
-        autoplay-delay="3500" autoplay-disable-on-interaction="false"
-        >
-            <swiper-slide><img src="{% static 'images/slider_1.webp' %}" alt=""></swiper-slide>
-            <swiper-slide><img src="{% static 'images/slider_2.webp' %}" alt=""></swiper-slide>
-        </swiper-container>   
-    </div>
-    <div class="search-form-container">
-        <form class="search-form" method="get">
-            {% crispy form %}
-        </form>
-    </div>
-    {% if inmuebles %}
-        <div class='container d-flex flex-wrap gap-4 justify-content-center'>
-            {% for inmueble in inmuebles %}
-                    {% include "components/inmuebleCardHome.html" %}
-            {% endfor %}
-        </div>
-    {% endif %}
-{% endblock content %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <div>
+    <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" navigation="false" space-between="30" centered-slides="true" autoplay-delay="3500" autoplay-disable-on-interaction="false">
+      <swiper-slide>
+        <img src="{% static 'images/slider_1.webp' %}" alt="" />
+      </swiper-slide>
+      <swiper-slide>
+        <img src="{% static 'images/slider_2.webp' %}" alt="" />
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
+  <div class="search-form-container">
+    <form id="search-form" class="search-form d-flex w-100" method="get">
+      <div class="d-flex gap-2 flex-wrap flex-md-nowrap">
+        {% crispy form %}
+      </div>
+    </form>
+  </div>
+
+  <div id="results-container" class="container mt-4">
+    {% include 'components/inmuebles_list.html' %}
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var regionSelect = document.getElementById('id_region')
+      var comunaSelect = document.getElementById('id_comuna')
+      var tipoInmuebleSelect = document.getElementById('id_tipo_de_inmueble')
+      var searchForm = document.getElementById('search-form')
+      var resultsContainer = document.getElementById('results-container')
+    
+      function updateComunas() {
+        var regionId = regionSelect.value
+    
+        // Clear current options
+        comunaSelect.innerHTML = '<option value="">Todas las comunas</option>'
+    
+        if (regionId) {
+          // Fetch comunas for the selected region
+          fetch('/get_comunas/?region_id=' + regionId)
+            .then((response) => response.json())
+            .then((data) => {
+              data.comunas.forEach(function (comuna) {
+                var option = document.createElement('option')
+                option.value = comuna.id
+                option.textContent = comuna.nombre
+                comunaSelect.appendChild(option)
+              })
+              updateResults()
+            })
+        } else {
+          updateResults()
+        }
+      }
+    
+      function updateResults() {
+        var formData = new FormData(searchForm)
+        var searchParams = new URLSearchParams(formData)
+    
+        fetch('{% url "home" %}?' + searchParams.toString(), {
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        })
+          .then((response) => response.text())
+          .then((html) => {
+            resultsContainer.innerHTML = html
+            setupDescriptionToggles() // Llamamos a esta función después de actualizar el contenido
+          })
+      }
+    
+      function setupDescriptionToggles() {
+        document.querySelectorAll('.description-toggle').forEach(function (button) {
+          button.addEventListener('click', function (e) {
+            e.preventDefault()
+            var cardText = this.closest('.card-text')
+            var descriptionText = cardText.querySelector('.description-text')
+            var fullText = this.dataset.fullText
+    
+            if (this.textContent === 'Leer más') {
+              descriptionText.textContent = fullText
+              this.textContent = 'Leer menos'
+            } else {
+              descriptionText.textContent = fullText.slice(0, 100) + '...'
+              this.textContent = 'Leer más'
+            }
+          })
+        })
+      }
+    
+      regionSelect.addEventListener('change', updateComunas)
+      comunaSelect.addEventListener('change', updateResults)
+      tipoInmuebleSelect.addEventListener('change', updateResults)
+    
+      // Llamar a updateComunas al cargar la página para asegurar que las comunas
+      // estén correctamente filtradas si hay una región seleccionada por defecto
+      updateComunas()
+    
+      // Configurar los toggles de descripción iniciales
+      setupDescriptionToggles()
+    })
+  </script>
+{% endblock %}
