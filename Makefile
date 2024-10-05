@@ -20,6 +20,6 @@ run-local:
 	@if [ $$(docker ps -a -q -f name=inmobiliario) ]; then \
 	docker rm -f inmobiliario; \
 	fi
-	docker run --env-file .env --name inmobiliario -p 127.0.0.1:8889:8889 inmobiliario
+	docker run --env-file .env --name inmobiliario -p 127.0.0.1:8002:8002 inmobiliario
 
 all: install format lint test build run

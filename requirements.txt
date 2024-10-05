@@ -28,3 +28,5 @@ tomlkit==0.13.2
 typing_extensions==4.11.0
 tzdata==2024.1
 dj-database-url==2.1.0
+gunicorn==20.1.0
+whitenoise==6.6.0
