@@ -135,12 +135,12 @@ class DatosForm(forms.ModelForm):
 
 # FORM DE REGISTRO DE INMUEBLE
 class InmuebleForm(forms.ModelForm):
+    imagen = forms.ImageField(required=True)  # Campo para subir la imagen
 
     class Meta:
         model = Inmueble
         fields = [
             "nombre",
-            "imagen",
             "direccion",
             "comuna",
             "descripcion",
@@ -155,7 +155,6 @@ class InmuebleForm(forms.ModelForm):
 
         labels = {
             "nombre": "Nombre",
-            "imagen": "Imagen",
             "direccion": "Dirección",
             "comuna": "Comuna",
             "descripcion": "Descripción",

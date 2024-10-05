@@ -214,7 +214,12 @@ class TipoDeInmueble(models.Model):
 
 class Inmueble(models.Model):
     nombre = models.CharField("Nombre", max_length=50, help_text="Nombre o título del inmueble")
-    imagen = models.ImageField("Imagen", upload_to="inmuebles", help_text="Imagen principal del inmueble")
+    imagen_url = models.URLField(
+        "URL de la imagen",
+        max_length=1000,
+        default="https://via.placeholder.com/300x200.png?text=No+Image",
+        help_text="URL de la imagen principal del inmueble en S3"
+    )
     direccion = models.CharField("Dirección", max_length=100, help_text="Dirección del inmueble")
     comuna = models.ForeignKey(
         Comuna, on_delete=models.SET_NULL, related_name="inmuebles", null=True,

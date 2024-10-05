@@ -27,7 +27,7 @@ from .models import (
     Datos,
     Region,
 )
-
+from .utils import upload_to_s3
 
 register = template.Library()
 
@@ -252,9 +252,17 @@ class InmuebleCreateView(LoginRequiredMixin, ArrendadorRequiredMixin, CreateView
         return kwargs
 
     def form_valid(self, form):
-        response = super().form_valid(form)
+        inmueble = form.save(commit=False)
+        inmueble.arrendador = self.request.user
+
+        imagen = self.request.FILES.get('imagen')
+        if imagen:
+            imagen_url = upload_to_s3(imagen)
+            inmueble.imagen_url = imagen_url
+
+        inmueble.save()
         messages.success(self.request, "Inmueble creado exitosamente.")
-        return response
+        return super().form_valid(form)
 
     def form_invalid(self, form):
         messages.error(self.request, "Por favor, corrija los errores en el formulario.")
@@ -431,3 +439,5 @@ def eliminarInmueble(request, inmueble_id):
     inmueble.delete()
     messages.success(request, "Inmueble eliminado exitosamente.")
     return JsonResponse({"success": True}, status=200)
+
+

@@ -1,7 +1,7 @@
 {% load custom_filters %} {# Asegúrate de crear este archivo de filtros personalizados #}
 
 <div class="card">
-  <img src="{{ inmueble.imagen.url }}" class="card-img-top" alt="{{ inmueble.nombre }}" />
+  <img src="{{ inmueble.imagen_url }}" class="card-img-top" alt="{{ inmueble_nombre }}" />
   <div class="card-body">
     <h5 class="card-title">{{ inmueble.nombre }}</h5>
     <p class="card-text">

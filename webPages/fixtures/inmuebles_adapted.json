@@ -3,7 +3,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Departamento Amoblado",
-      "imagen": "inmuebles/depto1_AjMTneX.webp",
+      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/depto1_AjMTneX.webp",
       "direccion": "Roncesvalles 6415",
       "comuna": [
         "Las Condes",
@@ -27,7 +27,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Amplio Departamento",
-      "imagen": "inmuebles/departamento_las_condes_11DBHEW.webp",
+      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/departamento_las_condes_11DBHEW.webp",
       "direccion": "Sta. Rita 872",
       "comuna": [
         "La Reina",
@@ -51,7 +51,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Departamento Frente al Mar",
-      "imagen": "inmuebles/depto3.webp",
+      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/depto3.webp",
       "direccion": "Pje. Aucallu 180",
       "comuna": [
         "Algarrobo",
@@ -75,7 +75,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Departamento Centrico",
-      "imagen": "inmuebles/depto4.webp",
+      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/depto4.webp",
       "direccion": "General Mackenna 1555",
       "comuna": [
         "Santiago",
@@ -99,7 +99,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Bella Casa",
-      "imagen": "inmuebles/casa1.jpeg",
+      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/casa1.jpeg",
       "direccion": "Laguna San Rafael 3111",
       "comuna": [
         "Puerto Varas",
@@ -123,7 +123,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Casa Hermosa",
-      "imagen": "inmuebles/casa2.jpeg",
+      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/casa2.jpeg",
       "direccion": "Av. Los Arrayanes 980",
       "comuna": [
         "Curicó",
@@ -147,7 +147,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Tu Hogar Entre Montanas",
-      "imagen": "inmuebles/casa3.jpeg",
+      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/casa3.jpeg",
       "direccion": "Los Acacios 2737",
       "comuna": [
         "San José de Maipo",
@@ -171,7 +171,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Parcela Acogedora",
-      "imagen": "inmuebles/parcela_ekRiASv.webp",
+      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/parcela_ekRiASv.webp",
       "direccion": "Calle Larga 35000",
       "comuna": [
         "Los Andes",
@@ -195,7 +195,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Bella Parcela",
-      "imagen": "inmuebles/parceela2.webp",
+      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/parceela2.webp",
       "direccion": "El papagayo 48B",
       "comuna": [
         "Talagante",

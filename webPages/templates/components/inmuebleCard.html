@@ -1,23 +1,21 @@
 {% load static %}
 
 <div class="card" style="max-width: 50%;">
-    <img src="{{ inmueble.imagen.url }}" class="card-img-top" alt="{{ inmueble.nombre }}">
-    <div class="card-body">
+  <img src="{{ inmueble.imagen_url }}" class="card-img-top" alt="{{ inmueble_nombre }}" />
+  <div class="card-body">
     <h5 class="card-title">{{ inmueble.nombre }}</h5>
-
-    </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">Dirección: {{ inmueble.direccion }}, {{ inmueble.comuna }}, {{ inmueble.region }}</li>
-        <li class="list-group-item">Precio de Arriendo: ${{ inmueble.precio_arriendo }}</li>
-        <li class="list-group-item">Publicado el: {{ inmueble.fecha_publicacion }}</li>
-    </ul>
-    <div class="card-body">
-        {% if inmueble.disponible %}
-            <button class="btn btn-warning" onclick="ocultarInmueble({{ inmueble.id }})">Ocultar</button>
-        {% else %}
-            <button class="btn btn-danger" onclick="mostrarInmueble({{ inmueble.id }})">Mostrar</button>
-            <button class="btn btn-danger" onclick="eliminarInmueble({{ inmueble.id }})">Eliminar</button>
-        {% endif %}
-    </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Dirección: {{ inmueble.direccion }}, {{ inmueble.comuna }}, {{ inmueble.region }}</li>
+    <li class="list-group-item">Precio de Arriendo: ${{ inmueble.precio_arriendo }}</li>
+    <li class="list-group-item">Publicado el: {{ inmueble.fecha_publicacion }}</li>
+  </ul>
+  <div class="card-body">
+    {% if inmueble.disponible %}
+      <button class="btn btn-warning" onclick="ocultarInmueble({{ inmueble.id }})">Ocultar</button>
+    {% else %}
+      <button class="btn btn-danger" onclick="mostrarInmueble({{ inmueble.id }})">Mostrar</button>
+      <button class="btn btn-danger" onclick="eliminarInmueble({{ inmueble.id }})">Eliminar</button>
+    {% endif %}
+  </div>
 </div>
-
