@@ -1,27 +1,27 @@
 <div class="card mb-3" style="max-width: 1200px;">
-    <div class="row g-0">
-      <div class="col-md-8">
-        <img class="detail-image" src="{{ inmueble.imagen.url }}" class="img-fluid rounded-start " alt="{{ inmueble.nombre }}">
-      </div>
-      <div class="col-md-4 p-4">
-        <div class="card-body">
-          <h5 class="card-title">{{ inmueble.nombre }}</h5>
-          <div>
-            <p class="list-group-item">Dirección: {{ inmueble.direccion }}, {{ inmueble.comuna }}, {{ inmueble.region }}</p>
-            <a href="">Ver mapa</a>
-          </div>
-          <p class="list-group-item">Precio de Arriendo: ${{ inmueble.precio_arriendo }}</p>
-          <p class="card-text">{{ inmueble.descripcion }}</p>
-          <ul>
-            <li class="list-group-item">Superficie construida: {{ inmueble.superficie_construida }}m2</li>
-            <li class="list-group-item">Superficie total: {{ inmueble.superficie_total }}m2</li>
-            <li class="list-group-item">Dormitorios: {{ inmueble.cantidad_habitaciones }}</li>
-            <li class="list-group-item">Baños: {{ inmueble.cantidad_banos }}</li>
-            <li class="list-group-item">Estacionamientos: {{ inmueble.cantidad_estacionamientos }}</li>
-            <li class="list-group-item">Publicado el: {{ inmueble.fecha_publicacion }}</li>
-          </ul>
-          <a href="{% url 'solicitarArriendo' inmueble.id %}" class="btn btn-primary">Solicitar arriendo</a>
+  <div class="row g-0">
+    <div class="col-md-8">
+      <img class="detail-image" src="{{ inmueble.imagen_url }}" class="img-fluid rounded-start" alt="{{ inmueble.nombre }}" />
+    </div>
+    <div class="col-md-4 p-4">
+      <div class="card-body">
+        <h5 class="card-title">{{ inmueble.nombre }}</h5>
+        <div>
+          <p class="list-group-item">Dirección: {{ inmueble.direccion }}, {{ inmueble.comuna }}, {{ inmueble.region }}</p>
+          <a href="">Ver mapa</a>
         </div>
+        <p class="list-group-item">Precio de Arriendo: ${{ inmueble.precio_arriendo }}</p>
+        <p class="card-text">{{ inmueble.descripcion }}</p>
+        <ul>
+          <li class="list-group-item">Superficie construida: {{ inmueble.superficie_construida }}m2</li>
+          <li class="list-group-item">Superficie total: {{ inmueble.superficie_total }}m2</li>
+          <li class="list-group-item">Dormitorios: {{ inmueble.cantidad_habitaciones }}</li>
+          <li class="list-group-item">Baños: {{ inmueble.cantidad_banos }}</li>
+          <li class="list-group-item">Estacionamientos: {{ inmueble.cantidad_estacionamientos }}</li>
+          <li class="list-group-item">Publicado el: {{ inmueble.fecha_publicacion }}</li>
+        </ul>
+        <a href="{% url 'solicitarArriendo' inmueble.id %}" class="btn btn-primary">Solicitar arriendo</a>
       </div>
     </div>
   </div>
+</div>
