@@ -1,17 +1,29 @@
-   venv/
-   .venv/
-   __pycache__/
-   *.pyc
-   *.pyo
-   *.pyd
-   .git
-   .env
-   .vscode
-   .DS_Store
-   .venv
-   .venv_wsl
-   .pytest_cache
-   .coverage
-   .coverage.*
-   htmlcov
-   .tox
+.env
+.git
+.gitignore
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.pytest_cache/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+staticfiles/
+media/

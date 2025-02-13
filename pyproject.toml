@@ -1,0 +1,69 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "PortalWebInmobiliario"
+version = "0.1.0"
+authors = [{ name = "Your Name", email = "your.email@example.com" }]
+description = "A Django-based real estate web portal"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "asgiref==3.8.1",
+    "astroid==3.3.4",
+    "black==24.8.0",
+    "boto3==1.35.34",
+    "botocore==1.35.34",
+    "click==8.1.7",
+    "colorama==0.4.6",
+    "crispy-bootstrap5==2024.2",
+    "dill==0.3.9",
+    "dj-database-url==2.1.0",
+    "django==5.0.4",
+    "django-crispy-forms==2.1",
+    "django-storages==1.14.4",
+    "gunicorn==20.1.0",
+    "iniconfig==2.0.0",
+    "isort==5.13.2",
+    "jmespath==1.0.1",
+    "mccabe==0.7.0",
+    "mypy-extensions==1.0.0",
+    "packaging==24.2",
+    "pathspec==0.12.1",
+    "pillow==10.3.0",
+    "platformdirs==4.3.6",
+    "pluggy==1.5.0",
+    "psycopg2-binary==2.9.9",
+    "pylint==3.3.1",
+    "pylint-django==2.5.5",
+    "pylint-plugin-utils==0.8.2",
+    "pytest==8.3.3",
+    "python-dateutil==2.9.0.post0",
+    "python-dotenv==1.0.1",
+    "s3transfer==0.10.2",
+    "setuptools==75.1.0",
+    "six==1.16.0",
+    "sqlparse==0.5.0",
+    "tomlkit==0.13.2",
+    "typing-extensions==4.11.0",
+    "tzdata==2024.1",
+    "urllib3==2.2.3",
+    "whitenoise==6.6.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/yourusername/PortalWebInmobiliario"
+"Bug Tracker" = "https://github.com/yourusername/PortalWebInmobiliario/issues"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.hatch.build.targets.wheel]
+packages = ["inmobiliario"]

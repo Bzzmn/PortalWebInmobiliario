@@ -1,0 +1,137 @@
+[
+    {
+        "model": "webPages.usuario",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$JKWzHGx9qJvYPEtKzXwL8M$YQyqwTq4l8J5q4Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z=",
+            "last_login": null,
+            "is_superuser": false,
+            "is_staff": false,
+            "is_active": true,
+            "email": "arrendador1@mail.com",
+            "es_arrendador": true,
+            "nombre": "Matías",
+            "apellido": "González",
+            "rut": "111111111"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$JKWzHGx9qJvYPEtKzXwL8M$YQyqwTq4l8J5q4Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z=",
+            "last_login": null,
+            "is_superuser": false,
+            "is_staff": false,
+            "is_active": true,
+            "email": "arrendador2@mail.com",
+            "es_arrendador": true,
+            "nombre": "Valentina",
+            "apellido": "Muñoz",
+            "rut": "222222222"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$JKWzHGx9qJvYPEtKzXwL8M$YQyqwTq4l8J5q4Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z=",
+            "last_login": null,
+            "is_superuser": false,
+            "is_staff": false,
+            "is_active": true,
+            "email": "arrendador3@mail.com",
+            "es_arrendador": true,
+            "nombre": "Sebastián",
+            "apellido": "Rojas",
+            "rut": "333333333"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$JKWzHGx9qJvYPEtKzXwL8M$YQyqwTq4l8J5q4Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z=",
+            "last_login": null,
+            "is_superuser": false,
+            "is_staff": false,
+            "is_active": true,
+            "email": "arrendador4@mail.com",
+            "es_arrendador": true,
+            "nombre": "Catalina",
+            "apellido": "Silva",
+            "rut": "444444444"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$JKWzHGx9qJvYPEtKzXwL8M$YQyqwTq4l8J5q4Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z=",
+            "last_login": null,
+            "is_superuser": false,
+            "is_staff": false,
+            "is_active": true,
+            "email": "arrendador5@mail.com",
+            "es_arrendador": true,
+            "nombre": "Benjamín",
+            "apellido": "Contreras",
+            "rut": "555555555"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$JKWzHGx9qJvYPEtKzXwL8M$YQyqwTq4l8J5q4Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z=",
+            "last_login": null,
+            "is_superuser": false,
+            "is_staff": false,
+            "is_active": true,
+            "email": "arrendador6@mail.com",
+            "es_arrendador": true,
+            "nombre": "Isabella",
+            "apellido": "Martínez",
+            "rut": "666666666"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$JKWzHGx9qJvYPEtKzXwL8M$YQyqwTq4l8J5q4Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z=",
+            "last_login": null,
+            "is_superuser": false,
+            "is_staff": false,
+            "is_active": true,
+            "email": "arrendador7@mail.com",
+            "es_arrendador": true,
+            "nombre": "Santiago",
+            "apellido": "Vargas",
+            "rut": "777777777"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$JKWzHGx9qJvYPEtKzXwL8M$YQyqwTq4l8J5q4Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z=",
+            "last_login": null,
+            "is_superuser": false,
+            "is_staff": false,
+            "is_active": true,
+            "email": "arrendador8@mail.com",
+            "es_arrendador": true,
+            "nombre": "Antonia",
+            "apellido": "Pérez",
+            "rut": "888888888"
+        }
+    },
+    {
+        "model": "webPages.usuario",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$JKWzHGx9qJvYPEtKzXwL8M$YQyqwTq4l8J5q4Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z9Y9Z=",
+            "last_login": null,
+            "is_superuser": false,
+            "is_staff": false,
+            "is_active": true,
+            "email": "arrendador9@mail.com",
+            "es_arrendador": true,
+            "nombre": "Lucas",
+            "apellido": "Soto",
+            "rut": "999999999"
+        }
+    }
+]

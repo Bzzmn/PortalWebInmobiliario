@@ -3,7 +3,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Departamento Amoblado",
-      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/depto1_AjMTneX.webp",
+      "imagen_url": "https://general-images-bucket.s3.sa-east-1.amazonaws.com/inmobiliario/depto1.webp",
       "direccion": "Roncesvalles 6415",
       "comuna": [
         "Las Condes",
@@ -27,7 +27,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Amplio Departamento",
-      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/departamento_las_condes_11DBHEW.webp",
+      "imagen_url": "https://general-images-bucket.s3.sa-east-1.amazonaws.com/inmobiliario/departamento_las_condes.webp",
       "direccion": "Sta. Rita 872",
       "comuna": [
         "La Reina",
@@ -51,7 +51,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Departamento Frente al Mar",
-      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/depto3.webp",
+      "imagen_url": "https://general-images-bucket.s3.sa-east-1.amazonaws.com/inmobiliario/depto3.webp",
       "direccion": "Pje. Aucallu 180",
       "comuna": [
         "Algarrobo",
@@ -75,7 +75,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Departamento Centrico",
-      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/depto4.webp",
+      "imagen_url": "https://general-images-bucket.s3.sa-east-1.amazonaws.com/inmobiliario/depto4.webp",
       "direccion": "General Mackenna 1555",
       "comuna": [
         "Santiago",
@@ -99,7 +99,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Bella Casa",
-      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/casa1.jpeg",
+      "imagen_url": "https://general-images-bucket.s3.sa-east-1.amazonaws.com/inmobiliario/casa1.webp",
       "direccion": "Laguna San Rafael 3111",
       "comuna": [
         "Puerto Varas",
@@ -123,7 +123,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Casa Hermosa",
-      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/casa2.jpeg",
+      "imagen_url": "https://general-images-bucket.s3.sa-east-1.amazonaws.com/inmobiliario/casa2.webp",
       "direccion": "Av. Los Arrayanes 980",
       "comuna": [
         "Curicó",
@@ -147,7 +147,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Tu Hogar Entre Montanas",
-      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/casa3.jpeg",
+      "imagen_url": "https://general-images-bucket.s3.sa-east-1.amazonaws.com/inmobiliario/casa3.webp",
       "direccion": "Los Acacios 2737",
       "comuna": [
         "San José de Maipo",
@@ -171,7 +171,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Parcela Acogedora",
-      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/parcela_ekRiASv.webp",
+      "imagen_url": "https://general-images-bucket.s3.sa-east-1.amazonaws.com/inmobiliario/parcela.webp",
       "direccion": "Calle Larga 35000",
       "comuna": [
         "Los Andes",
@@ -195,7 +195,7 @@
     "model": "webPages.inmueble",
     "fields": {
       "nombre": "Bella Parcela",
-      "imagen_url": "https://inmobiliario-thefullstack-digital.s3.amazonaws.com/inmuebles/parceela2.webp",
+      "imagen_url": "https://general-images-bucket.s3.sa-east-1.amazonaws.com/inmobiliario/parceela2.webp",
       "direccion": "El papagayo 48B",
       "comuna": [
         "Talagante",
